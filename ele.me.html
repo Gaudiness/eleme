@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>饿了么</title>
+    <meta charset="gbk" />
+    <link href="css/ele.me/ele.me.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <script src="js/libs/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="js/custom/home.js" charset="gbk"></script>
+    <script src="js/libs/knockout-3.1.0.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="container-left">
+            <div class="left-header">
+                <div class="header-menu container-width">
+                    <img src="images/logo.png" style="display: inline-block" />
+                    <div>
+                        <div class="eleme-menubutton eleme-menubutton-selected"><span class="eleme-content">首页</span></div>
+                        <div class="eleme-menubutton">
+                            <span class="eleme-content">品牌商家</span>
+                            <div class="eleme-hotTag">
+                                <span class="eleme-tagContent">HOT</span>
+                                <span class="eleme-radius"></span>
+                            </div>
+                        </div>
+                        <div class="eleme-menubutton"><span class="eleme-content">我的订单</span></div>
+                    </div>
+                    <div class="header-persom">
+                        <div class="eleme-iconbutton"><span class="icon-briefcase"></span>积分商城</div>
+                        <div class="eleme-iconbutton"><span class="icon-headphones"></span>服务中心</div>
+                        <div class="eleme-iconbutton" id="sellPhone">
+                            <span class="icon-tablet"></span>手机应用
+                            <div class="eleme-QRCode1">
+                                <div class="eleme-up"></div>
+                                <div class="QRCode1-content">扫一扫, 手机订餐更方便</div>
+                                <img src="images/eleme.png" />
+                            </div>
+                        </div>
+                        <div class="eleme-iconbutton right"><span class="icon-user"></span>登录/注册</div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-width left-content">
+                <div class="eleme-row-1">
+                    <div class="eleme-location">
+                        <span class="eleme-location-title">当前位置：</span>
+                        <span class="eleme-location-focus">闵行区上海交通大学(闵行校区)内</span>
+                        <a href="#">[切换地址]</a>
+                    </div>
+
+                </div>
+                <div class="eleme-row-1">
+                    <div class="eleme-imgBox" data-bind="foreach: imgSrc">
+                        <img data-bind="attr: { src: src }, visible: visible" />
+                    </div>
+                    <div class="eleme-page" data-bind="foreach: pageList">
+                        <span class="eleme-page-style" data-bind="text: $data, click: $parent.changeImage, css: { selected: $parent.currentIndex() == $data - 1 }"></span>
+                    </div>
+                </div>
+                <div class="eleme-row-1">
+                    <div id="content-group">
+                        <div>
+                            <a class="group-menu group-select">外卖商家</a>
+                            <a class="group-menu ">附近的团购</a>
+                            <img src="images/takeout.png" class="takeout" />
+                        </div>
+                        <div class="eleme-contentBox">
+                            <div class="sellers-type">
+                                <span>商家分类：</span>
+                                <span class="typeitem stroe-selected">全部商家</span>
+                                <span class="typeitem" style="color: red">品牌商家</span>
+                                <span class="typeitem">快餐类</span>
+                                <span class="typeitem">正餐类</span>
+                                <span class="typeitem">小吃零食</span>
+                                <span class="typeitem">甜品饮品</span>
+                                <span class="typeitem">果蔬生鲜</span>
+                                <span class="typeitem">鲜花蛋糕</span>
+                                <span class="typeitem">商超类</span>
+                            </div>
+                            <div class="sorting-type">
+                                <div class="type-rol1">
+                                    <span class="rol1-title">默认排序</span>
+                                    <span>销量高</span>
+                                    <span>评价好</span>
+                                    <!-- ko with:sorting -->
+                                    <div class="eleme-dropdown">
+                                        <div id="showSelectedSorting">
+                                            <span data-bind="text: selected"></span><span class="flag icon-chevron-down"></span>
+                                        </div>
+                                        <div class="eleme-dropdown-item" id="sorting">
+                                            <div data-bind="foreach: array">
+                                                <span data-bind="text: $data, click: $root.changeSorting"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko with:takenout -->
+                                    <div class="eleme-dropdown">
+                                        <div id="showSelectedPrice">
+                                            起送价格:<span data-bind="text: selected"></span><span class="flag icon-chevron-down"></span>
+                                        </div>
+                                        <div class="eleme-dropdown-item" id="price">
+                                            <div data-bind="foreach: array">
+                                                <span data-bind="text: $data, click: $root.changeTakenout"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="eleme-search" id="search-input">
+                                    <input type="text" placeholder="搜索商家，美食..." />
+                                    <span class="icon-search"></span>
+                                </div>
+                                <div class="type-rol2">
+                                    <span>
+                                        <input type="checkbox" />新开商家</span>
+                                    <span>
+                                        <input type="checkbox" />免费配送</span>
+                                    <span>
+                                        <input type="checkbox" />饿配送</span>
+                                    <span>
+                                        <input type="checkbox" />可开发票</span>
+                                    <span>
+                                        <input type="checkbox" />在线支付</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="eleme-row-1">
+                    <div class="row-Recommend">
+                        <span>想吃好点的，看看附近<span class="row-strong"> 15 家 </span>品牌商家吧，<a href="#" class="row-link">立即查看</a></span>
+                    </div>
+                </div>
+                <div class="eleme-row-1 eleme-contentBox marginTop">
+                    <div data-bind="foreach: storeInformarion">
+                        <a class="row-item">
+                            <div class="item-logo">
+                                <img data-bind="attr: { src: src }" />
+                                <span data-bind="text: costTime"></span>
+                            </div>
+                            <div class="row-details">
+                                <div class="details-title"><span data-bind="text: title"></span></div>
+                                <div class="details-star">月售<span data-bind="text: count"></span>单</div>
+                                <div class="details-cost"><span data-bind="text: takeout"></span>元起送/免费配送</div>
+                                <div class="details-activity">
+                                    <div data-bind="foreach: activity">
+                                        <span class="activity-icon" data-bind="text: name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 外框 -->
+                            <div class="mod-container" data-bind="css: { 'eleme-details-1': ($index() + 1) % 4 == 1, 'eleme-details-2': ($index() + 1) % 4 == 2 || ($index() + 1) % 4 == 0, 'eleme-details-3': ($index() + 1) % 4 == 3 }">
+                                <!-- 小三角部分 -->
+                                <div class="mod-triangle">
+                                    <span class="t-border"></span>
+                                    <span class="t-inset"></span>
+                                </div>
+                                <div class="container-context">
+                                    <span class="context-title" data-bind="text: title"></span>
+                                    <div data-bind="foreach: activity">
+                                        <div class="activity-details">
+                                            <span class="activity-icon" data-bind="text: name"></span>
+                                            <span data-bind="text: information"></span>
+                                        </div>
+                                    </div>
+                                    <div class="takeout-details">
+                                        <span data-bind="text: takeout"></span>元起送 | 免费配送 | 平均
+                                            <span data-bind="text: costTime"></span>分钟送达
+                                    </div>
+                                    <span data-bind="text: explaination"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="container-width left-footer">
+                <div>
+                    <div class="footer-half">
+                        <div class="half-third">
+                            <div class="title">用户帮助</div>
+                            <div>服务中心</div>
+                            <div>常见问题</div>
+                            <div>在线客服</div>
+                        </div>
+                        <div class="half-third">
+                            <div class="title">商务合作</div>
+                            <div>我要开店</div>
+                            <div>加盟指南</div>
+                            <div>市场合作</div>
+                            <div>开放平台</div>
+                        </div>
+                        <div class="half-third">
+                            <div class="title">关于我们</div>
+                            <div>饿了么介绍</div>
+                            <div>加入我们</div>
+                            <div>联系我们</div>
+                            <div>服务协议</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="footer-half line">
+                        <div class="footer-half feed-back">
+                            <div>24小时客服热线 : 10105757</div>
+                            <div>意见反馈 : feedback@ele.me</div>
+                            <div id="extension-icon">
+                                关注我们 :
+                                <span class="icon-twitter"></span>
+                                <span class="icon-github"></span>
+                                <span class="icon-github-alt"></span>
+                            </div>
+                        </div>
+                        <div class="footer-half footer-QRCode">
+                            <img src="images/eleme.png" />
+                            <div class="QRCode-right">
+                                <span>下载手机版</span>扫一扫,手机订餐方便
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="footer-botton">
+                    <span>增值电信业务许可证 : 沪B2-20150033 | 沪ICP备 09007032 | 上海工商行政管理 Copyright 2008-2015 ele.me, All Rights Reserved.</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="container-right margin-Right">
+            <div class="eleme-menu">
+                <div class="right-menu right-bar">
+
+                    <div id="one">
+                        <span class="icon-building"></span>
+                        <div class="menu-tag"></div>
+                    </div>
+                    <hr />
+                    <div id="menu-cart"><span class="icon-shopping-cart"></span></div>
+                    <hr />
+                    <div id="two"><span class="icon-envelope-alt"></span></div>
+                    <div id="three"><span class="icon-github"></span></div>
+                </div>
+                <div class="right-service right-bar">
+                    <div id="four"><span class="icon-qrcode"></span></div>
+                    <div id="five"><span class="icon-headphones"></span></div>
+                    <div id="six" style="display: none"><span class="icon-upload-alt"></span></div>
+                </div>
+            </div>
+            <div class="eleme-dashbord">
+                <div class="eleme-dashbord-title">
+                    <span class="eleme-title-content">购物车</span><span class="icon-double-angle-right"></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="eleme-buttonTag fixed" id="myOrder" data-bind="visible: myOrderVisible">
+                <div></div>
+                <span>我的订单</span>
+            </div>
+            <div class="eleme-buttonTag fixed" id="myInformation" data-bind="visible: myInformationVisible">
+                <div></div>
+                <span>我的信息</span>
+            </div>
+            <div class="eleme-buttonTag fixed" id="myHistory" data-bind="visible: myHistoryVisible">
+                <div></div>
+                <span>浏览历史</span>
+            </div>
+            <div class="eleme-buttonTag fixed" id="serviceOnline" data-bind="visible: serviceOnlineVisible">
+                <div></div>
+                <span>在线客服</span>
+            </div>
+            <div class="eleme-buttonTag fixed" id="backTop" data-bind="visible: serviceOnlineVisible">
+                <div></div>
+                <span>回到顶部</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
